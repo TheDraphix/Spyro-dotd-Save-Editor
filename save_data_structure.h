@@ -4,8 +4,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-// TODO: Complete the save_slotdata struct. create a uuid struct in the future?
-//
+// TODO: 
+// Complete the save_slotdata struct. 
+// create a UUID struct in the future?
+
 // unknown entries are given the name "unknown_{xbox memory address}" (This might be unreliable in the future).
 
 typedef struct {
@@ -22,11 +24,11 @@ typedef struct {
 } save_metadata;
 
 typedef struct {
-    uint16_t player_class_full_id[0x2];
+    uint16_t player_class_full_id[2];
     uint8_t player_instance_id;
     uint8_t unknown_0x000F;
-    uint8_t current_slot_start_offset[0x4];
-    uint8_t unknown_0x0014[0x4];
+    uint8_t current_slot_start_offset[4];
+    uint8_t unknown_0x0014[4];
     bool slot_status;
     float total_game_time; // the size of a float is not standardised however it is usually 4 bytes (should be fine)
     uint32_t game_state_object_status;
