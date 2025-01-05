@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+// unknown save entries are named "unknown_{xbox360 memory address}"
 
 typedef struct {
 	uint8_t unknown_0x0000[0x10]; // wii/ps2 memory address
