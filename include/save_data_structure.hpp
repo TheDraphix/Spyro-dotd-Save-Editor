@@ -4,14 +4,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-// TODO: 
-// Complete the save_slotdata struct. 
-// create a UUID struct in the future?
-
-// unknown entries are given the name "unknown_{xbox memory address}" (This might be unreliable in the future).
 
 typedef struct {
-    uint8_t unknown_0x0000[0x10];
+    uint8_t unknown_0x0000[0x10]; // wii/ps2 memory address
     bool file_status;
 } save_wii_ps2_header;
 
@@ -38,7 +33,7 @@ typedef struct {
     uint32_t spawn_point_uuid;
 
     // add flags. entries should be placed in the order they are in memory.    
-} save_slotdata;
+} save_slot_data;
 
 
 // W.I.P example
