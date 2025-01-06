@@ -4,7 +4,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-// unknown save entries are named "unknown_{xbox360 memory address}"
+// unknown save entries are named "unknown_{xbox360 memory address}" unless stated otherwise
+
 namespace savefile 
 {
 	typedef struct {
@@ -21,13 +22,13 @@ namespace savefile
 	} metadata;
 	
 	typedef struct {
-		uint16_t player_class_full_id[2];
+		uint16_t player_class_full_id;
 		uint8_t player_instance_id;
 		uint8_t unknown_0x000F;
-		uint8_t current_slot_start_offset[4];
+		uint32_t current_slot_start_offset;
 		uint8_t unknown_0x0014[4];
 		bool slot_status;
-		float total_game_time; // the size of a float is not standardised however it is usually 4 bytes (should be fine)
+		float total_game_time;
 		uint32_t game_state_object_status;
 		uint32_t game_state_uuid[4];
 		uint32_t next_slot_start_offset;
@@ -38,14 +39,120 @@ namespace savefile
 		bool module_completion_flag[438];
 		bool game_level_flag[12];
 
-	} slot_data;
+		uint32_t spyro_current_health;
+		uint32_t cynder_current_health;
+		uint32_t spyro_current_mana;
+		uint32_t cynder_current_mana;
+		int32_t spyro_current_fury_points;
+		int32_t cynder_current_fury_points;
+		int32_t spyro_unspent_exp;
+		int32_t cynder_unspent_exp;
+		int32_t fire_exp;
+		int32_t ice_exp;
+		int32_t earth_exp;
+		int32_t electricity_exp;
+		int32_t purple_fury_exp;
+		int32_t poison_exp;
+		int32_t shadow_exp;
+		int32_t fear_exp;
+		int32_t wind_exp;
+		int32_t dark_fury_exp;
+
+		bool bonus_objective_flag[165];
+
+		int32_t spyro_kills;
+		int32_t cynder_kills;
+		int32_t spyro_max_combo;
+		int32_t cynder_max_combo;
+		uint32_t fire_mana_spent;
+		uint32_t ice_mana_spent;
+		uint32_t earth_mana_spent;
+		uint32_t electricty_mana_spent;
+		uint32_t purple_fury_mana_spent;
+		uint32_t poison_mana_spent;
+		uint32_t shadow_mana_spent;
+		uint32_t fear_mana_spent;
+		uint32_t wind_mana_spent;
+		uint32_t dark_fury_mana_spent;
+		float spyro_gameplay_time;
+		float cynder_gameplay_time;
+		float total_gameplay_time;
+		float total_2_player_gameplayer_time;
+	} start_slot_data;
 	
-	
-	// W.I.P example
 	typedef struct {
-		save_wii_ps2_header header;
-		save_metadata metadata;
-		save_slotdata slotdata[5];
+		uint8_t objective[52];
+		uint8_t counter[6];
+
+		uint8_t cynder_equiped_armor[3];
+		uint8_t spyro_equiped_armor[3];
+		bool cynder_display_armor;
+		bool spyro_display_armor;
+
+		uint8_t unknown_0x0574;
+
+		bool chapter_unlock[12] // note an unused entry is included (probably an unused chapter)
+		bool gallery_unlock[5];
+
+		uint8_t unknown_0x0586;
+	} end_slot_data;
+
+	typedef struct { // ps3 addresses are used for unknown addresses
+		bool auto_read;
+		uint32_t file_setting;
+		uint16_t game_structure_class_full_id;
+		uint16_t game_structure_class_instance_id;
+		uint8_t unknown_0x007;
+		uint32_t start_of_next_slot_data;
+		uint32_t current_language_fake;
+		uint32_t current_language;
+		bool subtitles;
+		bool tutorials;
+		uint8_t unknown_0x016;
+		uint8_t unknown_0x017;
+		uint32_t audio_mode;
+		uint8_t unknown_0x01c[4];
+		float sound_effects_volume;
+		float voices_volume;
+		float music_volume;
+		bool player_1_vibrations;
+		bool player_2_vibrations;
+		bool player_1_invert_verticle_axis;
+		bool player_2_invert_verticle_axis;
+		bool player_1_invert_horizontal_axis;
+		bool player_2_invert_horizontal_axis;
+		uint8_t unknown_0x032[10];
+		bool widescreen;
+		bool player_1_sixaxis;
+		uint8_t unknown_0x03f;
+	} start_options_data;
+	
+	typedef struct {
+		uint8_t unknown_0x044[2];
+		uint8_t unknown_0x046;
+		uint8_t unknown_0x047;
+		uint8_t unknown_0x048[4];
+	} end_options_data;
+
+
+
+
+	typedef struct {
+		start_slot_data start;
+		end_slot_data end;
+	} non_xbox_slot_data;
+
+	typedef struct {
+		start_options_data start;
+		end_options_data end;
+	} wii_ps2_options;
+
+	typedef struct {
+		wii_ps2_header header;
+		metadata metadata;
+		non_xbox_slot_data[5];
+		uint32_t padding[0x3ab6];
+		wii_ps2_options options;
 	} ps2;
 }
 
