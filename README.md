@@ -1,13 +1,6 @@
 # Spyro-dotd-Save-Editor
 A save editor for the wii/ps2/ps3/xbox360 releases of spyro dawn of the dragon.
 ## Usage
-## Roadmap
-- [ ] Command line tool
-  - [ ] wii
-  - [ ] ps2
-  - [ ] ps3
-  - [ ] xbox360
-- [ ] GUI
 ## Contributing
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 1. Fork the Project
