@@ -14,7 +14,7 @@ namespace save_data
 	enum Version {WII, PS2, XBOX, PS3};
 	
 	typedef struct {
-		uint8_t *unknown_0x0000[0x10]; // wii/ps2 memory address
+		uint8_t *unknown_0x0000; // array of 16 // wii/ps2 memory address
 		bool *file_status;
 	} Header;
 	
@@ -31,14 +31,14 @@ namespace save_data
 		uint8_t *player_instance_id;
 		uint8_t *unknown_0x000F;
 		uint32_t *current_slot_start_offset;
-		uint8_t *unknown_0x0014[4];
+		uint8_t *unknown_0x0014; // array of 4
 		bool *slot_status;
 		float *total_game_time; 
 		uint32_t *game_state_object_status;
-		uint32_t *game_state_uuid[4];
+		uint32_t *game_state_uuid; // array of 4
 		uint32_t *next_slot_start_offset;
 		uint32_t *spawn_point_object_status;
-		uint32_t *spawn_point_uuid[4];
+		uint32_t *spawn_point_uuid; // array of 4
 		
 		bool *module_event_flag[438];
 		bool *module_completion_flag[438];
@@ -135,25 +135,29 @@ namespace save_data
 	} Options;
 
 	typedef struct {
+		bool dummy;
 		Header header;
 		Metadata metadata;
 		Slot slot[5];
 		Options options;
-	} Save;
+	} Content;
 	
 	class GameSave {
 		public:
-			Version version;
-			Save save;
+			char *name;
+			Content content;
 			
 			GameSave(const char *file_name);
+			void Write();
+			
 			int GetSize() { return this->size; };
+			Version GetVersion() { return this->version; };
 		
 		private:
+			Version version;
 			int size;
-			char *data;
-			
-			void MapSaveData();	// map the save file to data adressess
+			char *data;	
+			void MapSaveDataAddresses();
 			void DetermineVersion();
 	};
 }
