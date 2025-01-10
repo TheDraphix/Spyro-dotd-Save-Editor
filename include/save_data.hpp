@@ -27,6 +27,8 @@ namespace save_data
 	} Metadata;
 	
 	typedef struct {
+		bool dummy;
+
 		uint16_t *player_class_full_id;
 		uint8_t *player_instance_id;
 		uint8_t *unknown_0x000F;
@@ -40,9 +42,9 @@ namespace save_data
 		uint32_t *spawn_point_object_status;
 		uint32_t *spawn_point_uuid; // array of 4
 		
-		bool *module_event_flag[438];
-		bool *module_completion_flag[438];
-		bool *game_level_flag[12];
+		bool *module_event_flag; // array of 438
+		bool *module_completion_flag; // array of 438
+		bool *game_level_flag; // array of 12
 
 		uint32_t *spyro_current_health;
 		uint32_t *cynder_current_health;
@@ -63,7 +65,7 @@ namespace save_data
 		int32_t *wind_exp;
 		int32_t *dark_fury_exp;
 
-		bool *bonus_objective_flag[165];
+		bool *bonus_objective_flag; // array of 165
 
 		int32_t *spyro_kills;
 		int32_t *cynder_kills;
@@ -84,18 +86,18 @@ namespace save_data
 		float *total_gameplay_time;
 		float *total_2_player_gameplayer_time;
 		
-		uint8_t *objective[52];
-		uint8_t *counter[6];
+		uint8_t *objective; // array of 52
+		uint8_t *counter; // array of 6
 
-		uint8_t *cynder_equiped_armor[3];
-		uint8_t *spyro_equiped_armor[3];
+		uint8_t *cynder_equiped_armor; // array of 3
+		uint8_t *spyro_equiped_armor; // array of 3
 		bool *cynder_display_armor;
 		bool *spyro_display_armor;
 
 		uint8_t *unknown_0x0574;
 
-		bool *chapter_unlock[12]; // note an unused entry is included (probably an unused chapter)
-		bool *gallery_unlock[5];
+		bool *chapter_unlock; // array of 12
+		bool *gallery_unlock; // array of 5
 
 		uint8_t *unknown_0x0586;
 	} Slot;
@@ -135,7 +137,6 @@ namespace save_data
 	} Options;
 
 	typedef struct {
-		bool dummy;
 		Header header;
 		Metadata metadata;
 		Slot slot[5];

@@ -12,10 +12,10 @@ int main()
 	std::cout << "File size: " << save.GetSize() << std::endl;
 	std::cout << "Version: " << save.GetVersion() << std::endl;
 
-	save.content.slot[0].spawn_point_uuid[0] = uuid::spawn::attack_of_the_golem[0][0];
-	save.content.slot[0].spawn_point_uuid[1] = uuid::spawn::attack_of_the_golem[0][1];
-	save.content.slot[0].spawn_point_uuid[2] = uuid::spawn::attack_of_the_golem[0][2];
-	save.content.slot[0].spawn_point_uuid[3] = uuid::spawn::attack_of_the_golem[0][3];
+	save.content.slot[0].spawn_point_uuid[0] = uuid::spawn::malefors_lair[0][0];
+	save.content.slot[0].spawn_point_uuid[1] = uuid::spawn::malefors_lair[0][1];
+	save.content.slot[0].spawn_point_uuid[2] = uuid::spawn::malefors_lair[0][2];
+	save.content.slot[0].spawn_point_uuid[3] = uuid::spawn::malefors_lair[0][3];
 
 	save.content.slot[0].spawn_point_uuid[0] = byteswap<uint32_t>(save.content.slot[0].spawn_point_uuid[0]);
 	save.content.slot[0].spawn_point_uuid[1] = byteswap<uint32_t>(save.content.slot[0].spawn_point_uuid[1]);
