@@ -6,8 +6,8 @@
 #include <iostream>
 #include <fstream>
 
-
-// unknown save entries are named "unknown_{xbox360 memory address}" unless stated otherwise
+#include "uuid.hpp"
+// unknown save entries are named "unknown_{ps3 memory address}" unless stated otherwise
 
 namespace save_data 
 {
@@ -37,11 +37,11 @@ namespace save_data
 		bool *slot_status;
 		float *total_game_time; 
 		uint32_t *game_state_object_status;
-		uint32_t *game_state_uuid; // array of 4
+		uuid::UUID game_state_uuid;
 		uint32_t *next_slot_start_offset;
 		uint32_t *spawn_point_object_status;
-		uint32_t *spawn_point_uuid; // array of 4
-		
+		uuid::UUID spawn_point_uuid;		
+
 		bool *module_event_flag; // array of 438
 		bool *module_completion_flag; // array of 438
 		bool *game_level_flag; // array of 12
@@ -54,16 +54,8 @@ namespace save_data
 		int32_t *cynder_current_fury_points;
 		int32_t *spyro_unspent_exp;
 		int32_t *cynder_unspent_exp;
-		int32_t *fire_exp;
-		int32_t *ice_exp;
-		int32_t *earth_exp;
-		int32_t *electricity_exp;
-		int32_t *purple_fury_exp;
-		int32_t *poison_exp;
-		int32_t *shadow_exp;
-		int32_t *fear_exp;
-		int32_t *wind_exp;
-		int32_t *dark_fury_exp;
+		int32_t *spyro_elem_exp; // array of 5
+		int32_t *cynder_elem_exp; // array of 5
 
 		bool *bonus_objective_flag; // array of 165
 
@@ -71,16 +63,8 @@ namespace save_data
 		int32_t *cynder_kills;
 		int32_t *spyro_max_combo;
 		int32_t *cynder_max_combo;
-		uint32_t *fire_mana_spent;
-		uint32_t *ice_mana_spent;
-		uint32_t *earth_mana_spent;
-		uint32_t *electricty_mana_spent;
-		uint32_t *purple_fury_mana_spent;
-		uint32_t *poison_mana_spent;
-		uint32_t *shadow_mana_spent;
-		uint32_t *fear_mana_spent;
-		uint32_t *wind_mana_spent;
-		uint32_t *dark_fury_mana_spent;
+		uint32_t *spyro_mana_spent; // array of 5
+		uint32_t *cynder_mana_spent; // array of 5
 		float *spyro_gameplay_time;
 		float *cynder_gameplay_time;
 		float *total_gameplay_time;
@@ -94,12 +78,12 @@ namespace save_data
 		bool *cynder_display_armor;
 		bool *spyro_display_armor;
 
-		uint8_t *unknown_0x0574;
+		uint8_t *unknown_0x0538;
 
 		bool *chapter_unlock; // array of 12
 		bool *gallery_unlock; // array of 5
 
-		uint8_t *unknown_0x0586;
+		uint8_t *unknown_0x054a;
 	} Slot;
 	
 	typedef struct { // ps3 addresses are used for unknown addresses
