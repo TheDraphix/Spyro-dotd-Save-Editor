@@ -150,27 +150,27 @@ namespace uuid // all UUID's are in little endian
 	}
 	namespace game_state
 	{
-		const uint32_t player_current[4] = {0x679df416, 0x70262341, 0xac926ce3, 0x8bf277eb};
-		const uint32_t player_current_temp[4] = {0xae41192e, 0x40766e44, 0x94641367, 0x30c8e07e};
-		const uint32_t player_slot[5][4] = {
+		const UUID player_current[4] = {0x679df416, 0x70262341, 0xac926ce3, 0x8bf277eb};
+		const UUID player_current_temp[4] = {0xae41192e, 0x40766e44, 0x94641367, 0x30c8e07e};
+		const UUID player_slot[5][4] = {
 			{0xd6c177d8, 0xcc32824b, 0xad01b117, 0xa859d694},
 			{0xd7651b63, 0x3271ad46, 0x9a645629, 0x30b289db},
 			{0x12908612, 0x8c2c4144, 0x840c0fb9, 0x92ea7d34},
 			{0x66ea9c9c, 0x47754c44, 0xb197bbf5, 0xfa35eab1},
 			{0xbe20b24a, 0x24b43d42, 0x91bb8e6a, 0x97947a83}
 		};
-		const uint32_t main_menu[4] = {0x6f76117d, 0xdcbe8048, 0xb89c0175, 0x306440fb};
-		const uint32_t the_catacombs__new_game[4] = {0xaf609146, 0x5905e042, 0xbc98b937, 0xe209f8e8};
-		const uint32_t twilight_falls[4] = {0xd241f201, 0x3ebcea4f, 0x8772a8b9, 0x62ddc5e5};
-		const uint32_t valley_of_avalar[4] = {0xad3e7500, 0x3e3aba4e, 0xa203ecea, 0x7f9c6fea};
-		const uint32_t dragon_city[4] = {0x18713582, 0xa0e80e46, 0xbc454144, 0x45cf3326};
-		const uint32_t attack_of_the_golem[4] = {0x036350ad, 0x656cc540, 0xa4a4de12, 0xa9d32ad0};
-		const uint32_t ruins_of_warfang[4] = {0x73b9bb6b, 0x496d7e47, 0xadb84c3d, 0xd834e637};
-		const uint32_t the_dam[4] = {0xf69ddf8c, 0x02fca34c, 0x8c20530c, 0x3f278c66};
-		const uint32_t the_destroyer[4] = {0xf2771111, 0xa5a44440, 0xb2590b86, 0xfd244221};
-		const uint32_t burned_lands[4] = {0xfabc02c3, 0xc64e7943, 0x9380edf1, 0xd3799229};
-		const uint32_t floating_islands[4] = {0x57b4e090, 0x5c3b1e4a, 0xa2dd97a5, 0x6fd6f3f6};
-		const uint32_t malefors_lair[4] = {0x4a3d2f83, 0x03cf8048, 0x8f1fb817, 0x477c41bf};
+		const UUID main_menu[4] = {0x6f76117d, 0xdcbe8048, 0xb89c0175, 0x306440fb};
+		const UUID the_catacombs__new_game[4] = {0xaf609146, 0x5905e042, 0xbc98b937, 0xe209f8e8};
+		const UUID twilight_falls[4] = {0xd241f201, 0x3ebcea4f, 0x8772a8b9, 0x62ddc5e5};
+		const UUID valley_of_avalar[4] = {0xad3e7500, 0x3e3aba4e, 0xa203ecea, 0x7f9c6fea};
+		const UUID dragon_city[4] = {0x18713582, 0xa0e80e46, 0xbc454144, 0x45cf3326};
+		const UUID attack_of_the_golem[4] = {0x036350ad, 0x656cc540, 0xa4a4de12, 0xa9d32ad0};
+		const UUID ruins_of_warfang[4] = {0x73b9bb6b, 0x496d7e47, 0xadb84c3d, 0xd834e637};
+		const UUID the_dam[4] = {0xf69ddf8c, 0x02fca34c, 0x8c20530c, 0x3f278c66};
+		const UUID the_destroyer[4] = {0xf2771111, 0xa5a44440, 0xb2590b86, 0xfd244221};
+		const UUID burned_lands[4] = {0xfabc02c3, 0xc64e7943, 0x9380edf1, 0xd3799229};
+		const UUID floating_islands[4] = {0x57b4e090, 0x5c3b1e4a, 0xa2dd97a5, 0x6fd6f3f6};
+		const UUID malefors_lair[4] = {0x4a3d2f83, 0x03cf8048, 0x8f1fb817, 0x477c41bf};
 	}
 }
 
