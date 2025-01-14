@@ -1,20 +1,14 @@
-#include "save_data.hpp"
+#include <iostream>
+#include <cstdint>
+#include <cstring>
+
 #include "uuid.hpp"
-#include "endianness.hpp"
+#include "byte_utils.hpp"
 
 int main()
-{
-	char file_name[32];
-	std::cout << "Enter file name: ";
-	std::cin >> file_name;
-	
-	save_data::GameSave save(file_name);
-	std::cout << "File size: " << save.GetSize() << std::endl;
-	std::cout << "Version: " << save.GetVersion() << std::endl;
-
-	save.content.slot[0].spawn_point_uuid = byteswap(uuid::spawn::floating_islands[1]);
-		
-	save.Write();
-	return 0;
+{ // New uuid demo
+	uint32_t a[4] = {0xb537349c, 0x22ff7d46, 0x83d8c133, 0x34416b2d};
+	std::memcpy(a, uuid::spawn::twilight_falls[0], 4);
+	ByteSwap<uint32_t>(a,4);
+	std::cout << std::hex << a[0] << std::endl;
 }
-
