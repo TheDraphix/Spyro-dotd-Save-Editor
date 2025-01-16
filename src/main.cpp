@@ -4,11 +4,21 @@
 
 #include "uuid.hpp"
 #include "byte_utils.hpp"
+#include "save_data.hpp"
 
 int main()
-{ // New uuid demo
-	uint32_t a[4] = {0xb537349c, 0x22ff7d46, 0x83d8c133, 0x34416b2d};
-	std::memcpy(a, uuid::spawn::twilight_falls[0], 4);
-	ByteSwap<uint32_t>(a,4);
-	std::cout << std::hex << a[0] << std::endl;
+{
+	char input[32];
+	
+	std::cout << "INFILE: ";
+	std::cin >> input;
+	save_data::GameSave save(input);
+	
+	memcpy(save.slot[0].spawn_point_uuid, uuid::spawn::valley_of_avalar[0], 4*sizeof(uint32_t));
+	
+	std::cout << "OUTFILE: ";
+	std::cin >> input;
+	save.Write(input);
+	
+	return 0;
 }

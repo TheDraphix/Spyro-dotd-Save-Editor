@@ -1,12 +1,11 @@
 #ifndef SAVE_DATA_STRUCTURE_H
 #define SAVE_DATA_STRUCTURE_H
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <fstream>
+#include <cstdint>
+#include <cstdbool>
 #include <string>
 
-#include "uuid.hpp"
+#include "byte_utils.hpp"
 // unknown save entries are named "unknown_{ps3 memory address}" unless stated otherwise
 
 namespace save_data 
@@ -98,8 +97,8 @@ namespace save_data
 		uint8_t unknown_0x016;
 		uint8_t unknown_0x017;
 		uint32_t audio_mode;
-		uint8_t unknown_0x01c[4];
-		float sound_effects_volume;
+		uint8_t unknown_0x01c[3]; // should be an offset of 4? but this works.
+		float sound_fx_volume;
 		float voices_volume;
 		float music_volume;
 		bool player_1_vibrations;
@@ -111,7 +110,9 @@ namespace save_data
 		uint8_t unknown_0x032[10];
 		bool widescreen;
 		bool player_1_sixaxis;
+		bool player_2_sixaxis;
 		uint8_t unknown_0x03f;
+		uint32_t gamma;
 		uint8_t unknown_0x044[2];
 		uint8_t unknown_0x046;
 		uint8_t unknown_0x047;
@@ -127,7 +128,11 @@ namespace save_data
 	
 	class GameSave {
 		public:
-			Content content;
+			//Content content;
+			Header header;
+			Metadata metadata;
+			Slot slot[5];
+			Options options;
 			
 			GameSave(const std::string file_name);
 			void Write(const std::string file_name);			
@@ -135,6 +140,13 @@ namespace save_data
 
 		private:
 			Version version;
+			ByteStream file;
+
+			void ProcessMetadata();
+			void ProcessSlot(Slot& s);
+			void ProcessOptions();
+			
+			void SwapPS2Endianness();
 	};
 			
 }
