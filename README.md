@@ -9,5 +9,14 @@ If you have a suggestion that would make this better, please fork the repo and c
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 ## Compiling
+```
+git clone https://github.com/TheDraphix/Spyro-dotd-Save-Editor.git
+cd Spyro-dotd-Save-Editor
+git submodule update --init --recursive
+mkdir build
+cd build
+cmake ..
+make
+```
 ## Acknowledgments
 * [Save datastructure provided by Dragonsoul](https://docs.google.com/spreadsheets/d/19JVcJtX0yqKfIKyWEaX-rIAwIn0_XncMSQ6LW3FgUSw/edit?usp=drivesdk)
