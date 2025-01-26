@@ -133,8 +133,8 @@ namespace save_data
 			Metadata metadata;
 			Slot slot[5];
 			Options options;
-			
-			GameSave(const std::string file_name);
+
+			void Read(const std::string file_name);
 			void Write(const std::string file_name);			
 			Version GetVersion() { return version; };
 

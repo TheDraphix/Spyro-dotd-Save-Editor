@@ -127,7 +127,7 @@ void GameSave::ProcessOptions()
 			options.unknown_0x044 <=>
 			options.unknown_0x046 <=>
 			options.unknown_0x047 <=>
-			options.unknown_0x048; // 31
+			options.unknown_0x048;
 	}
 }
 
@@ -140,8 +140,7 @@ void GameSave::SwapPS2Endianness()
 	}
 }
 
-
-GameSave::GameSave(const std::string file_name)
+void GameSave::Read(const std::string file_name)
 {
 	file.open(file_name, std::ios::in);
 	if (file.fail())
