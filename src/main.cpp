@@ -20,10 +20,12 @@ class MainFrame : public wxFrame {
 		wxNotebook *notebook;
 		wxBoxSizer *panel_sizer;
 		wxBoxSizer *top_sizer;
-		void OnOpen(wxCommandEvent& event);
 		
 		save_data::GameSave game_save;
+		void OnOpen(wxCommandEvent& event);
+		void OnSave(wxCommandEvent& event);
 		void ShowSaveData();
+		void WriteSaveData();
 };
 
 class Main : public wxApp
@@ -76,13 +78,17 @@ MainFrame::MainFrame()
 	SetSizerAndFit(top_sizer);
 	
 	Bind(wxEVT_MENU, &MainFrame::OnOpen, this, wxID_OPEN);
+	Bind(wxEVT_MENU, &MainFrame::OnSave, this, wxID_SAVE);
 	
 	notebook->Disable();
+	menu_bar->FindItem(wxID_SAVE)->Enable(false);
 }
-
 void MainFrame::OnOpen(wxCommandEvent& event)
 {
-	wxFileDialog open_file_dialog(this);
+	wxFileDialog open_file_dialog(
+		this, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString,
+		wxFileSelectorDefaultWildcardStr, wxFD_OPEN);
+	
 	if (open_file_dialog.ShowModal() == wxID_CANCEL)
 		return;
 		
@@ -92,9 +98,24 @@ void MainFrame::OnOpen(wxCommandEvent& event)
 		ShowSaveData();
 		
 		notebook->Enable();
+		menu_bar->FindItem(wxID_SAVE)->Enable(true);
 	}
 }
-
+void MainFrame::OnSave(wxCommandEvent& event)
+{
+	wxFileDialog save_file_dialog(
+		this, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString,
+		wxFileSelectorDefaultWildcardStr, wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
+	
+	if (save_file_dialog.ShowModal() == wxID_CANCEL)
+		return;
+		
+	if (true) // check if it is possible to save
+	{
+		WriteSaveData();
+		game_save.Write(static_cast<std::string>(save_file_dialog.GetPath()));
+	}
+}
 void MainFrame::ShowSaveData()
 {
 	int number_of_slots;
@@ -105,9 +126,13 @@ void MainFrame::ShowSaveData()
 		
 	for (int i=0; i<number_of_slots; i++)
 	{
+		slot[i]->readable_slot->SetValue(game_save.slot[i].readable_slot);
+		
 		slot[i]->dummy->SetValue(game_save.slot[i].dummy);
 		if (game_save.slot[i].dummy)
 		{
+			slot[i]->spawn_uuid->chapter->SetSelection(0);
+			slot[i]->spawn_uuid->location->SetValue(0);
 			slot[i]->spawn_uuid->Disable();
 		}
 		else
@@ -115,6 +140,26 @@ void MainFrame::ShowSaveData()
 			auto [chapter,location] = uuid::spawn::MatchUUID(game_save.slot[i].spawn_point_uuid);
 			slot[i]->spawn_uuid->chapter->SetSelection(static_cast<int>(chapter));
 			slot[i]->spawn_uuid->location->SetValue(location);
+		}
+	}
+}
+void MainFrame::WriteSaveData()
+{
+	int number_of_slots;
+	if (game_save.GetVersion()==save_data::PS2 || game_save.GetVersion()==save_data::WII)
+		number_of_slots = 5;
+	else
+		number_of_slots = 1;
+		
+	for (int i=0; i<number_of_slots; i++)
+	{
+		game_save.slot[i].readable_slot = slot[i]->readable_slot->GetValue();
+		if (slot[i]->dummy->GetValue())
+			game_save.slot[i].spawn_point_object_status = 0xFFFFFFFF;
+		else
+		{
+			game_save.slot[i].spawn_point_object_status = 0xFFFFFFFD;
+			memcpy(game_save.slot[i].spawn_point_uuid, uuid::spawn::spawn_point[slot[i]->spawn_uuid->chapter->GetSelection()][slot[i]->spawn_uuid->location->GetValue()], sizeof(uuid::UUID));
 		}
 	}
 }

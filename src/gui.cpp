@@ -8,10 +8,12 @@
 Slot::Slot(wxWindow *parent)
 	: wxScrolledWindow(parent)
 {
+	readable_slot = new wxCheckBox(this, wxID_ANY, "Readable Slot");
 	dummy = new wxCheckBox(this, wxID_ANY, "Dummy Slot");
 	spawn_uuid = new SpawnUUID(this);
 	
 	sizer= new wxBoxSizer(wxVERTICAL);
+	sizer->Add(readable_slot,1,wxEXPAND);
 	sizer->Add(dummy,1,wxEXPAND);
 	sizer->Add(spawn_uuid,1,wxEXPAND);
 	

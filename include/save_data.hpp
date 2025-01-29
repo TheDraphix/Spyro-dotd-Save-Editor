@@ -31,7 +31,7 @@ namespace save_data
 		uint8_t unknown_0x000F;
 		uint32_t current_slot_start_offset;
 		uint8_t unknown_0x0014[4];
-		bool slot_status;
+		bool readable_slot;
 		float total_game_time; 
 		uint32_t game_state_object_status;
 		uint32_t game_state_uuid[4];
@@ -128,7 +128,6 @@ namespace save_data
 	
 	class GameSave {
 		public:
-			//Content content;
 			Header header;
 			Metadata metadata;
 			Slot slot[5];

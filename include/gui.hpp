@@ -26,8 +26,9 @@ class Slot : public wxScrolledWindow {
 	public:
 		Slot(wxWindow *parent);
 		
-		SpawnUUID *spawn_uuid;
+		wxCheckBox *readable_slot;
 		wxCheckBox *dummy;
+		SpawnUUID *spawn_uuid;
 		
 	private:
 		wxBoxSizer *sizer;

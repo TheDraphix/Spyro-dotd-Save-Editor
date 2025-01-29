@@ -26,7 +26,7 @@ void GameSave::ProcessSlot(Slot& s)
 		s.unknown_0x000F <=>
 		s.current_slot_start_offset <=>
 		s.unknown_0x0014 <=>
-		s.slot_status <=>
+		s.readable_slot <=>
 		s.total_game_time <=>
 		s.game_state_object_status <=>
 		s.game_state_uuid <=>
@@ -188,8 +188,8 @@ void GameSave::Write(const std::string file_name)
 	ProcessOptions();	
 
 	if (version==PS2)
-	{
-		uint8_t padding[0x3bd] = {0};
+	{ // TODO: Find better way to add padding?
+		uint8_t padding[0x3b7] = {0};
 		file <=> padding;
 	}
 	
