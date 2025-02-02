@@ -189,8 +189,10 @@ void GameSave::Write(const std::string file_name)
 
 	if (version==PS2)
 	{ // TODO: Find better way to add padding?
-		uint8_t padding[0x3b7] = {0};
-		file <=> padding;
+		//uint8_t padding[0x3b7] = {0};
+		//file <=> padding;
+		file.seekg(0x4412 - 1, std::ios::beg);
+		file.put(0);
 	}
 	
 	file.close();

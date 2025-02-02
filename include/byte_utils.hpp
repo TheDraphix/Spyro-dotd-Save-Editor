@@ -28,14 +28,8 @@ void ByteSwap(T *x, int size)
 		x[i] = ByteSwap<T>(x[i]);
 }
 
-class ByteStream: std::fstream {
+class ByteStream: public std::fstream {
 	public:
-		using std::fstream::fstream;
-		using std::fstream::seekg;
-		using std::fstream::open;
-		using std::fstream::close;
-		using std::fstream::fail;
-		
 		enum Mode {READ, WRITE};
 		Mode mode;
 		
